@@ -1,289 +1,284 @@
-/* =========================================
+/* =========================================================
    FILE: preloader.css
-   ARCHITECT: Ultra Senior 4D Engine
-   PURPOSE: Hyper-Realistic Wood & Gold French Doors (UNCUT)
-   STATUS: 100% HEAVY, NO COMPRESSION
-========================================= */
+   ARCHITECTURE: Ultra-Heavy 4D Lounge Engine
+   SEQUENCE: 
+   1. Arch builds (0s-1.5s) 
+   2. Wood/Glass appears (1.5s-2.5s) 
+   3. RARE WINDOW pops (3s) 
+   4. TAP TO ENTER fades in at knobs (4.5s)
+========================================================= */
 
-/* --- 1. THE 4D ENVIRONMENT --- */
+/* --- 1. CORE ENGINE RESET --- */
+:root {
+    --gold-base: #D4AF37;
+    --gold-light: #FFFFAA;
+    --gold-dark: #8B6914;
+    --wood-dark: #120502;
+    --wood-light: #2a110a;
+}
+
+*, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+html, body {
+    width: 100%; height: 100%;
+    background-color: #020202; /* Deep Void Black */
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- 2. THE 3D ENVIRONMENT --- */
 .preloader-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #020101; /* Pitch Black Void */
+    width: 100%; height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    perspective: 2500px; /* Massive 3D Camera Depth for Realism */
+    perspective: 2000px; /* Extreme 3D Depth */
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
 }
 
-/* --- 2. THE OUTER GOLD ARCH (PERFECT SHAPE) --- */
-.outer-gold-arch {
+.stage-3d {
     position: relative;
-    width: 92vw;
-    height: 82vh; 
-    max-width: 500px;
-    
-    /* Perfect Circle Arch Geometry */
+    width: 90vw;
+    max-width: 450px;
+    height: 78vh;
+    max-height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+/* --- 3. THE OUTER GOLD ARCH (Loads Bottom -> Top) --- */
+.arch-frame {
+    position: absolute;
+    bottom: 0; /* Crucial for upward growth */
+    width: 100%;
+    height: 0%; /* Starts at 0 */
     border-radius: 250px 250px 0 0;
     
-    /* The Solid Gold Outer Frame Structure */
-    padding: 10px; /* Outer Gold Thickness */
-    padding-bottom: 25px; /* Heavier Base for Weight */
+    /* Frame Thickness */
+    padding: 10px;
+    padding-bottom: 35px; /* Heavy structural base */
     
-    /* True Metallic Gold Gradient */
+    /* 5-Stop Photorealistic Gold Gradient */
     background: linear-gradient(
-        135deg, 
-        #FFDF73 0%, 
-        #D4AF37 25%, 
-        #8B6914 50%, 
-        #F3E5AB 75%, 
-        #D4AF37 100%
+        160deg, 
+        var(--gold-dark) 0%, 
+        var(--gold-light) 20%, 
+        var(--gold-base) 50%, 
+        var(--gold-dark) 80%, 
+        var(--gold-light) 100%
     );
     
-    /* Outer Heavy Shadows for realistic pop */
+    /* 3D Shadows for massive volume */
     box-shadow: 
-        0 40px 80px rgba(0,0,0,0.99), 
-        0 10px 40px rgba(0,0,0,0.95),
-        0 0 25px rgba(212, 175, 55, 0.35); /* Outer Gold Aura */
+        0 40px 100px rgba(0,0,0,0.99), 
+        inset 0 0 15px rgba(255,255,255,0.3);
         
-    /* Phase 1 Animation: Window Loading from Depth */
-    transform: translateZ(-250px) scale(0.85);
-    opacity: 0;
-    animation: windowEntry 1.8s cubic-bezier(0.15, 1, 0.3, 1) forwards;
+    overflow: hidden;
+    will-change: height;
+    
+    /* ANIMATION: Grows upward for 1.5s */
+    animation: buildArchUpward 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* --- 3. THE INNER WOOD CASING (FIXED SHAPE & GAP) --- */
-.inner-wood-casing {
+/* --- 4. THE INNER DOORS WRAPPER --- */
+.doors-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
+    border-radius: 240px 240px 0 0;
+    background-color: #080302; /* Deep dark before wood loads */
+    box-shadow: inset 0 60px 100px rgba(0,0,0,0.99);
     
-    /* Matching Inner Radius so doors don't poke out */
-    border-radius: 240px 240px 0 0; 
-    overflow: hidden; /* CRITICAL: Hides the sharp door edges */
-    
-    /* Very Dark Vintage Wood Texture Base */
-    background: linear-gradient(180deg, #1f0b06 0%, #0d0402 100%);
-    
-    /* Wood Bevel and Inner Extreme Depth */
-    box-shadow: 
-        inset 0 50px 100px rgba(0,0,0,0.99),
-        inset 0 10px 30px rgba(0,0,0,0.9);
-    
-    /* Creating the Side Gaps and Center Split */
     display: flex;
-    justify-content: space-between; 
-    padding: 12px; /* Side gaps showing wood frame */
-    padding-top: 15%; 
+    justify-content: space-between;
+    padding: 12px;
+    padding-top: 15%;
+    
+    opacity: 0;
+    /* ANIMATION: Fades in after arch is built */
+    animation: fadeInDoors 1s ease-in-out 1.5s forwards;
 }
 
-/* --- 4. THE 3D DOORS --- */
+/* --- 5. THE FRENCH DOORS (Wood & Volume) --- */
 .door {
     position: relative;
-    width: 49.3%; /* Leaves a realistic 1.4% gap in the exact center */
+    width: 49.3%;
     height: 100%;
     
-    /* Dark Wood Door Base Color */
-    background: #140704;
+    /* True Dark Vintage Wood Texture */
+    background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-dark) 100%);
     
-    /* The Thick Gold Trim around the door itself */
-    border: 3.5px solid #D4AF37;
-    border-bottom-width: 10px; /* Heavy bottom kickplate */
+    /* Solid Gold Border Trims */
+    border: 3.5px solid var(--gold-base);
+    border-bottom-width: 18px; /* Thick bottom panel */
     
-    /* Door Bevel Shadow & Separation */
-    box-shadow: 
-        inset 0 0 30px rgba(0,0,0,0.95), /* Inner Door Depth */
-        inset 0 0 10px rgba(212,175,55,0.2), /* Subtle gold reflection inside */
-        5px 0 20px rgba(0,0,0,0.8); /* Door Separation Depth */
+    /* Inner depth shadow */
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
 }
 
-/* Left Door Meeting Edge */
 .left-door {
     border-radius: 250px 0 0 0;
-    border-right: 5px solid #FFDF73; /* Light hitting center split */
+    border-right: 5px solid #F3E5AB; /* Center light reflection */
 }
 
-/* Right Door Meeting Edge */
 .right-door {
     border-radius: 0 250px 0 0;
-    border-left: 5px solid #8B6914; /* Shadow on center split */
+    border-left: 5px solid #4a370b; /* Center dark shadow */
 }
 
-/* --- 5. THE SMOKY GLASS PANES --- */
+/* --- 6. THE SMOKY GLASS PANES --- */
 .glass-pane {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    
-    /* 4D Glass Gradient simulating Lounge Lighting */
-    background: linear-gradient(
-        135deg, 
-        rgba(30,30,30,0.65) 0%, 
-        rgba(10,10,10,0.85) 50%,
-        rgba(2,2,2,0.98) 100%
-    );
-    backdrop-filter: blur(8px);
+    background: linear-gradient(145deg, rgba(20,20,20,0.65) 0%, rgba(2,2,2,0.95) 100%);
+    backdrop-filter: blur(10px);
     z-index: 1;
+    
+    opacity: 0;
+    /* ANIMATION: Fades in slowly after doors */
+    animation: fadeInGlass 1.5s ease-in-out 2s forwards;
 }
 
-/* --- 6. THE WOOD GRIDS & GOLD TRIMS (HEAVY SHADOWS RESTORED) --- */
+/* --- 7. THE WOODEN GRIDS & GOLD TRIMS --- */
 .wood-grid {
     position: absolute;
-    /* 3D Wood Gradient Cylinders */
-    background: linear-gradient(90deg, #1f0b06, #3a150a, #1f0b06); 
+    background: #110502; 
+    border: 2px solid var(--gold-base); /* Thin gold line on grids */
     z-index: 5;
-    
-    /* The thick gold trims */
-    border: 2.5px solid #D4AF37;
-    
-    /* Restored Heavy Grid Shadows */
-    box-shadow: 
-        0 15px 30px rgba(0,0,0,0.99),
-        0 5px 15px rgba(0,0,0,0.8);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.95);
 }
 
-.wood-grid.vertical {
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 24px; /* Very Thicker wood */
-    height: 100%;
+.vertical-grid {
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 100%;
     border-top: none; border-bottom: none;
-    /* Adjusted shadow for vertical */
-    box-shadow: 
-        15px 0 30px rgba(0,0,0,0.99),
-        5px 0 15px rgba(0,0,0,0.8);
 }
 
-.wood-grid.horizontal {
-    left: 0;
-    width: 100%; 
-    height: 24px; /* Very Thicker wood */
+.horizontal-grid {
+    left: 0; width: 100%; height: 24px;
     border-left: none; border-right: none;
 }
 
-.wood-grid.horizontal.top { top: 32%; }
-.wood-grid.horizontal.bottom { top: 68%; }
+.top-grid { top: 32%; }
+.bottom-grid { top: 68%; }
 
-/* --- 7. THE 4D ROUND BRASS HANDLES (RESTORED DETAILS) --- */
-.brass-handle {
+/* --- 8. THE 3D BRASS KNOBS (Real Metal Finish) --- */
+.brass-knob {
     position: absolute;
-    top: 45%; /* Shifted UP so text fits perfectly below */
-    width: 36px; /* Slightly larger handles */
-    height: 36px;
-    border-radius: 50%; /* Perfect Circle */
+    top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px;
+    border-radius: 50%;
     z-index: 10;
     
-    /* Real 3D Sphere Gold/Brass Texture */
-    background: radial-gradient(circle at 35% 35%, #FFFFAA 0%, #D4AF37 40%, #8B6914 80%, #3a2803 100%);
+    /* Conic/Radial mix for metallic shine */
+    background: radial-gradient(circle at 30% 30%, #FFFFE0 0%, var(--gold-base) 40%, var(--gold-dark) 80%, #2b2005 100%);
     
-    /* Restored Heavy 3D Drop Shadow & Inset Bevel */
+    /* Heavy 3D Ball Shadow */
     box-shadow: 
-        10px 15px 25px rgba(0,0,0,0.99), 
-        5px 5px 10px rgba(0,0,0,0.8),
-        inset -4px -4px 8px rgba(0,0,0,0.7),
-        inset 2px 2px 5px rgba(255,255,255,0.8);
+        8px 12px 20px rgba(0,0,0,0.99), 
+        inset -4px -4px 10px rgba(0,0,0,0.8),
+        inset 2px 2px 5px rgba(255,255,255,0.5);
 }
 
-.left-handle { right: 14px; }
-.right-handle { left: 14px; }
+.left-knob { right: 14px; }
+.right-knob { left: 14px; }
 
-/* --- 8. THE BRAND NAME (BOLD, BELOW HANDLES, BLOCKS BACKGROUND) --- */
+/* --- 9. THE BRAND NAME (Front, Bold, Isolated) --- */
 .brand-title {
     position: absolute;
-    top: 76%; /* PERFECTLY PLACED BELOW HANDLES */
+    top: 76%; /* Positioned perfectly below the knobs */
     left: 50%;
-    transform: translate(-50%, -50%) translateZ(200px); /* Pushed far FRONT in 3D */
-    width: 130%; /* Bleeds over the doors */
+    transform: translate(-50%, -50%) translateZ(150px); /* Pushed in FRONT of everything */
+    width: 140%;
     text-align: center;
-    font-family: var(--font-heading);
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 12vw, 5rem);
+    letter-spacing: 4px;
+    line-height: 1.1;
     
-    /* MAXIMUM BOLDNESS */
-    font-weight: 900; 
-    font-size: clamp(2.6rem, 11vw, 4.8rem);
-    letter-spacing: 6px;
-    white-space: nowrap;
-    z-index: 999; 
-    
-    /* Pure Gold Gradient Text */
-    background: linear-gradient(
-        -45deg, 
-        #8B6914 20%, 
-        #D4AF37 40%, 
-        #FFFFAA 50%, 
-        #D4AF37 60%, 
-        #8B6914 80%
-    );
-    background-size: 200% auto;
+    /* Gold Foil Text */
+    background: linear-gradient(to bottom, var(--gold-light) 0%, var(--gold-base) 40%, #996b00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     
-    /* CRITICAL FIX: Heavy Solid Black Text-Shadow to block grids behind it */
-    text-shadow: 
-        0px 0px 10px #000000, 
-        0px 0px 20px #000000, 
-        0px 0px 30px #000000, 
-        0px 15px 40px #000000,
-        0px 20px 50px rgba(0,0,0,0.99);
+    /* Massive Solid Black Shadow to block background lines completely */
+    filter: 
+        drop-shadow(0px 0px 10px #000) 
+        drop-shadow(0px 10px 20px rgba(0,0,0,0.99))
+        drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.3));
+        
+    z-index: 50;
     
-    /* Sequence: Hidden -> Emerges -> Shines */
     opacity: 0;
-    animation: 
-        emergeFromDark 1.6s cubic-bezier(0.2, 1, 0.3, 1) 2.2s forwards,
-        goldShineSweep 3s infinite linear 3.8s;
+    /* ANIMATION: Pops in at 3 seconds */
+    animation: textEmerge 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s forwards;
 }
 
-/* --- 9. TAP TO ENTER (PREMIUM DUST-WHITE, NO GOLD) --- */
+/* --- 10. TAP TO ENTER (Placed exactly between the knobs) --- */
 .tap-to-enter {
-    margin-top: 60px;
-    cursor: pointer;
-    z-index: 999;
-    opacity: 0;
-    /* Fades in last */
-    animation: fadeInEntry 1s ease-out 4.8s forwards; 
-}
-
-.pulse-text {
-    font-family: var(--font-heading);
-    color: rgba(230, 230, 235, 0.75); /* Premium Dust White */
-    font-size: 1.1rem;
-    letter-spacing: 12px; /* Wider tracking */
-    font-weight: 400;
-    text-transform: uppercase;
+    position: absolute;
+    top: 50%; /* Aligned with the knobs */
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(180px); /* Front layer */
     
-    /* Soft white breathing glow */
-    animation: textBreathing 2.5s infinite alternate ease-in-out;
+    font-family: 'Cinzel', serif;
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    letter-spacing: 10px;
+    font-weight: 700;
+    
+    /* Text stroke/shadow to make it readable over the gap */
+    text-shadow: 0px 4px 15px rgba(0,0,0,0.99), 0px 0px 5px rgba(0,0,0,0.8);
+    
+    z-index: 60;
+    cursor: pointer;
+    
+    opacity: 0;
+    /* ANIMATION: Appears at 4.5 seconds, then pulses */
+    animation: 
+        fadeInTap 1s ease-in 4.5s forwards, 
+        pulseGlowTap 2s infinite alternate ease-in-out 5.5s;
 }
 
-/* --- 10. HEAVY 4D SEQUENCE KEYFRAMES --- */
+/* --- 11. THE CINEMATIC KEYFRAMES --- */
 
-/* 0s to 1.8s: Window appears from depth */
-@keyframes windowEntry {
-    0% { opacity: 0; transform: translateY(60px) translateZ(-250px) scale(0.8); box-shadow: none; }
-    100% { opacity: 1; transform: translateY(0) translateZ(0) scale(1); }
+/* Step 1: Arch grows upward */
+@keyframes buildArchUpward {
+    0% { height: 0%; }
+    100% { height: 100%; }
 }
 
-/* 2.2s to 3.8s: Text emerges from deep inside */
-@keyframes emergeFromDark {
-    0% { opacity: 0; transform: translate(-50%, -35%) translateZ(-100px) scale(0.85); filter: brightness(0); }
-    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(200px) scale(1); filter: brightness(1); }
+/* Step 2: Inner doors and wood fade in */
+@keyframes fadeInDoors {
+    0% { opacity: 0; filter: brightness(0); }
+    100% { opacity: 1; filter: brightness(1); }
 }
 
-/* 3.8s+: The Gold Shine passes over the text */
-@keyframes goldShineSweep {
-    0% { background-position: 200% center; }
-    50% { filter: drop-shadow(0px 0px 25px rgba(255,255,170,0.6)); }
-    100% { background-position: -200% center; }
+/* Step 3: Frosted glass details load */
+@keyframes fadeInGlass {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-/* 4.8s: Tap to enter fades in */
-@keyframes fadeInEntry {
-    0% { opacity: 0; transform: translateY(15px); }
-    100% { opacity: 1; transform: translateY(0); }
+/* Step 4: Text pops out in 3D */
+@keyframes textEmerge {
+    0% { opacity: 0; transform: translate(-50%, -35%) translateZ(0px) scale(0.85); }
+    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(150px) scale(1); }
 }
 
-/* White Breathing effect for Tap to Enter */
-@keyframes textBreathing {
-    0% { opacity: 0.4; text-shadow: 0 0 0 transparent; }
-    100% { opacity: 1; color: #ffffff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+/* Step 5: Tap to Enter fades in exactly between knobs */
+@keyframes fadeInTap {
+    0% { opacity: 0; transform: translate(-50%, -40%) translateZ(180px); }
+    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(180px); }
+}
+
+/* Continuous breathing glow for Tap to Enter */
+@keyframes pulseGlowTap {
+    0% { text-shadow: 0 4px 15px rgba(0,0,0,0.99), 0 0 5px rgba(255,255,255,0.1); color: #c0c0c0; }
+    100% { text-shadow: 0 4px 15px rgba(0,0,0,0.99), 0 0 20px rgba(255,255,255,0.8); color: #ffffff; }
 }
