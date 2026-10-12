@@ -1,0 +1,53 @@
+/* =========================================
+   RARE WINDOW - CORE THEME ENGINE (V1.0)
+   Enterprise-Grade CSS Architecture
+========================================= */
+
+:root {
+    /* 4D Color Palette */
+    --bg-deep-charcoal: #070707;
+    --brand-gold: #D4AF37;
+    --brand-gold-glow: rgba(212, 175, 55, 0.4);
+    --brand-leather-red: #4A0E17;
+    --emerald-accent: #0f4d31;
+    
+    /* Typography System */
+    --font-heading: 'Playfair Display', serif;
+    --font-ui: 'Inter', sans-serif;
+    
+    /* UI Safe Areas (Crucial for Modern Phones / Notch Support) */
+    --safe-bottom: env(safe-area-inset-bottom, 20px);
+    --safe-top: env(safe-area-inset-top, 20px);
+    
+    /* Hardware-Accelerated Animation Curves */
+    --ease-cinematic: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-snap: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Server-Grade Base Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Removes the cheap blue highlight on mobile taps */
+}
+
+html, body {
+    width: 100%;
+    /* 100dvh adapts dynamically to mobile browser UI showing/hiding */
+    height: 100dvh; 
+    background-color: var(--bg-deep-charcoal);
+    color: #ffffff;
+    font-family: var(--font-ui);
+    
+    /* App-like behavior restrictions */
+    overflow: hidden; 
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Base Typography */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+}
