@@ -17,13 +17,22 @@
     <link rel="stylesheet" href="preloader.css">
 </head>
 <body>
-    <!-- PHASE 1: The Cinematic 4-Step Preloader (The Arc Window) -->
+        <!-- PHASE 1: The Hyper-Realistic 4D Arch Window -->
     <div id="vibe-preloader" class="preloader-container">
-        <!-- 3D Window Structure -->
-        <div class="arc-wireframe">
-            <div class="wood-texture-overlay"></div>
-            <div class="arc-glow"></div>
+        
+        <!-- The Full-Screen 3D Window Structure -->
+        <div class="arc-window-4d">
+            
+            <!-- Window Frames (असली लकड़ी वाली ग्रिड्स) -->
+            <div class="window-grids">
+                <div class="grid-vertical"></div>
+                <div class="grid-horizontal top-arch-base"></div>
+                <div class="grid-horizontal middle-bar"></div>
+            </div>
+            
+            <!-- Single Line Glowing Title (लकड़ी के पीछे) -->
             <h1 class="brand-title">RARE WINDOW</h1>
+            
         </div>
         
         <!-- Interactive Entry -->
@@ -32,12 +41,3 @@
         </div>
     </div>
 
-    <!-- Main App Container (Hidden initially) -->
-    <main id="app-root" style="display: none;">
-        <!-- The Lounge Deck, Social Feed & Cart will mount here dynamically -->
-    </main>
-
-    <!-- Modular JS Architecture (Using type="module" for strict scope) -->
-    <script type="module" src="scripts/core/app.js"></script>
-</body>
-</html>
