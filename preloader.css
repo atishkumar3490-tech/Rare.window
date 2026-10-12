@@ -1,144 +1,151 @@
 /* =========================================
    FILE: preloader.css
-   PURPOSE: 4D Cinematic Entry Animation
-   PERFORMANCE: GPU-Accelerated (Ultra Heavy)
+   PURPOSE: Hyper-Realistic 4D Full-Screen Window
 ========================================= */
 
-/* Main Full-Screen Container */
 .preloader-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--bg-deep-charcoal);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    /* Hardware Acceleration Trigger */
-    will-change: opacity, transform;
-    transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic);
 }
 
-/* 1. The Arch Window Shape & Wireframe */
-.arc-wireframe {
+/* 1. THE FULL-SCREEN 4D ARCH FRAME */
+.arc-window-4d {
     position: relative;
-    width: 240px;
-    height: 350px;
-    /* This makes the perfect Arch shape */
-    border-top-left-radius: 120px;
-    border-top-right-radius: 120px;
-    border: 1.5px solid transparent;
+    width: 90vw; /* Covers almost full screen */
+    height: 82vh; 
+    max-width: 600px;
+    
+    /* Perfect Top Arch */
+    border-top-left-radius: 300px;
+    border-top-right-radius: 300px;
+    
+    /* Deep Dark Interior */
+    background: linear-gradient(180deg, #120406 0%, #050101 100%);
+    
+    /* Realistic Thick 3D Borders (Wood/Metal casing) */
+    border-top: 15px solid #230b0e;
+    border-left: 15px solid #1a0709;
+    border-right: 15px solid #1a0709;
+    border-bottom: 25px solid #0f0304; /* Heavier base */
+    
+    /* Hyper-Realistic Depth & Shadows */
+    box-shadow: 
+        inset 0px 30px 60px rgba(0,0,0,0.99), /* Deep inside shadow */
+        inset 0 0 15px rgba(212, 175, 55, 0.2), /* Subtle gold reflection inside */
+        0px 20px 50px rgba(0,0,0,0.9); /* Heavy drop shadow on outside */
+        
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    /* Animation: Draw the border slowly */
-    animation: drawWireframe 2s var(--ease-cinematic) forwards;
 }
 
-/* 2. The Vintage Leather/Wood Texture */
-.wood-texture-overlay {
+/* Inner Bevel (To make the window edge look curved and real) */
+.arc-window-4d::before {
+    content: '';
     position: absolute;
-    top: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    border-top-left-radius: 280px;
+    border-top-right-radius: 280px;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* 2. THE WINDOW PANES (असली लकड़ी की ग्रिड्स) */
+.window-grids {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10; /* Placed over the text */
+    pointer-events: none;
+}
+
+.grid-vertical {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 100%;
+    /* 3D Wood cylinder effect */
+    background: linear-gradient(90deg, #050102, #2e1014 50%, #050102);
+    box-shadow: 8px 0 20px rgba(0,0,0,0.9);
+}
+
+.grid-horizontal {
+    position: absolute;
     left: 0;
-    width: 100%;
-    height: 100%;
-    /* Dark Premium Gradient simulating Lounge Lighting */
-    background: linear-gradient(160deg, rgba(74, 14, 23, 0.8) 0%, rgba(7, 7, 7, 0.95) 100%);
-    opacity: 0;
-    z-index: 1;
-    /* Animation: Fade in texture after wireframe */
-    animation: revealTexture 1.5s var(--ease-cinematic) 1.5s forwards;
+    width: 100%; height: 14px;
+    /* 3D Wood cylinder effect */
+    background: linear-gradient(180deg, #050102, #2e1014 50%, #050102);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.9);
 }
 
-/* 3. The Golden Glow / Light Sweep */
-.arc-glow {
-    position: absolute;
-    top: -50%;
-    left: -100%;
-    width: 50%;
-    height: 200%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
-    z-index: 2;
-    transform: rotate(25deg);
-    /* Animation: Light passing over the window */
-    animation: lightSweep 4s infinite 2.5s;
-}
+.top-arch-base { top: 38%; }
+.middle-bar { top: 68%; }
 
-/* The Brand Name inside Window */
+/* 3. THE BRAND TEXT (Single Line & Letter Shine) */
 .brand-title {
-    color: var(--brand-gold);
-    font-size: 1.8rem;
-    letter-spacing: 5px;
+    position: absolute;
+    width: 100%;
     text-align: center;
-    line-height: 1.3;
-    z-index: 3;
-    opacity: 0;
-    transform: translateY(20px);
-    text-shadow: 0px 4px 15px var(--brand-gold-glow);
-    /* Animation: Text sliding up and fading in */
-    animation: textRise 1.2s var(--ease-cinematic) 2s forwards;
+    font-family: var(--font-heading);
+    /* Responsive size to fit in one line */
+    font-size: clamp(1.8rem, 7vw, 3rem);
+    letter-spacing: 5px;
+    white-space: nowrap; /* Forces text to stay on one line */
+    z-index: 5; /* Under the wooden grids */
+    
+    /* The Gold Shine Effect specifically on the letters */
+    background: linear-gradient(
+        -45deg, 
+        #8B6914 30%, 
+        #D4AF37 45%, 
+        #FFFFAA 50%, 
+        #D4AF37 55%, 
+        #8B6914 70%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Soft glow around text */
+    filter: drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.3));
+    
+    animation: textRise 1.5s ease-out forwards, shineLetters 3.5s infinite linear;
 }
 
-/* 4. Tap to Enter Button */
+/* 4. TAP TO ENTER */
 .tap-to-enter {
-    margin-top: 50px;
-    opacity: 0;
-    /* Animation: Fade in at the very end */
-    animation: fadeInBtn 1s ease-in 3.5s forwards;
+    margin-top: 30px;
     cursor: pointer;
 }
 
 .pulse-text {
+    font-family: var(--font-heading);
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     letter-spacing: 4px;
-    text-transform: uppercase;
-    /* Animation: Continuous breathing effect */
-    animation: breathingText 2.5s infinite alternate ease-in-out;
+    font-style: italic;
+    animation: pulseGlow 2s infinite alternate ease-in-out;
 }
 
-/* =========================================
-   KEYFRAMES (THE MAGIC ENGINE)
-========================================= */
-
-@keyframes drawWireframe {
-    0% { border-color: transparent; box-shadow: 0 0 0 transparent; }
-    100% { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); }
-}
-
-@keyframes revealTexture {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
+/* --- 4D KEYFRAMES --- */
 @keyframes textRise {
-    0% { opacity: 0; transform: translateY(20px) translateZ(0); }
-    100% { opacity: 1; transform: translateY(0) translateZ(0); }
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes lightSweep {
-    0% { left: -100%; }
-    50% { left: 200%; }
-    100% { left: 200%; }
+@keyframes shineLetters {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
 }
 
-@keyframes fadeInBtn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes breathingText {
+@keyframes pulseGlow {
     0% { opacity: 0.3; }
-    100% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
-}
-
-/* When Javascript triggers the 'Enter' action */
-.preloader-container.fade-out {
-    opacity: 0;
-    transform: scale(1.1); /* Slight 3D zoom out effect */
-    pointer-events: none;
+    100% { opacity: 1; color: var(--brand-gold); text-shadow: 0 0 15px rgba(212,175,55,0.5); }
 }
