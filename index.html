@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Server-grade mobile viewport setup (Prevents zooming & fixes iPhone notch) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#070707">
+    <title>Rare Window | Enter the Vibe</title>
+    
+    <!-- Enterprise-grade Font Preloading (Stops flickering) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Modular CSS Architecture -->
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/preloader.css">
+</head>
+<body>
+    <!-- PHASE 1: The Cinematic 4-Step Preloader (The Arc Window) -->
+    <div id="vibe-preloader" class="preloader-container">
+        <!-- 3D Window Structure -->
+        <div class="arc-wireframe">
+            <div class="wood-texture-overlay"></div>
+            <div class="arc-glow"></div>
+            <h1 class="brand-title">RARE WINDOW</h1>
+        </div>
+        
+        <!-- Interactive Entry -->
+        <div class="tap-to-enter" id="enter-lounge-btn">
+            <span class="pulse-text">Tap to Enter</span>
+        </div>
+    </div>
+
+    <!-- Main App Container (Hidden initially) -->
+    <main id="app-root" style="display: none;">
+        <!-- The Lounge Deck, Social Feed & Cart will mount here dynamically -->
+    </main>
+
+    <!-- Modular JS Architecture (Using type="module" for strict scope) -->
+    <script type="module" src="scripts/core/app.js"></script>
+</body>
+</html>
