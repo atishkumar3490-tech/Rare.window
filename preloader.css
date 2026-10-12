@@ -1,0 +1,144 @@
+/* =========================================
+   FILE: preloader.css
+   PURPOSE: 4D Cinematic Entry Animation
+   PERFORMANCE: GPU-Accelerated (Ultra Heavy)
+========================================= */
+
+/* Main Full-Screen Container */
+.preloader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-deep-charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Hardware Acceleration Trigger */
+    will-change: opacity, transform;
+    transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic);
+}
+
+/* 1. The Arch Window Shape & Wireframe */
+.arc-wireframe {
+    position: relative;
+    width: 240px;
+    height: 350px;
+    /* This makes the perfect Arch shape */
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border: 1.5px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Animation: Draw the border slowly */
+    animation: drawWireframe 2s var(--ease-cinematic) forwards;
+}
+
+/* 2. The Vintage Leather/Wood Texture */
+.wood-texture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark Premium Gradient simulating Lounge Lighting */
+    background: linear-gradient(160deg, rgba(74, 14, 23, 0.8) 0%, rgba(7, 7, 7, 0.95) 100%);
+    opacity: 0;
+    z-index: 1;
+    /* Animation: Fade in texture after wireframe */
+    animation: revealTexture 1.5s var(--ease-cinematic) 1.5s forwards;
+}
+
+/* 3. The Golden Glow / Light Sweep */
+.arc-glow {
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    z-index: 2;
+    transform: rotate(25deg);
+    /* Animation: Light passing over the window */
+    animation: lightSweep 4s infinite 2.5s;
+}
+
+/* The Brand Name inside Window */
+.brand-title {
+    color: var(--brand-gold);
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+    text-align: center;
+    line-height: 1.3;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(20px);
+    text-shadow: 0px 4px 15px var(--brand-gold-glow);
+    /* Animation: Text sliding up and fading in */
+    animation: textRise 1.2s var(--ease-cinematic) 2s forwards;
+}
+
+/* 4. Tap to Enter Button */
+.tap-to-enter {
+    margin-top: 50px;
+    opacity: 0;
+    /* Animation: Fade in at the very end */
+    animation: fadeInBtn 1s ease-in 3.5s forwards;
+    cursor: pointer;
+}
+
+.pulse-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    /* Animation: Continuous breathing effect */
+    animation: breathingText 2.5s infinite alternate ease-in-out;
+}
+
+/* =========================================
+   KEYFRAMES (THE MAGIC ENGINE)
+========================================= */
+
+@keyframes drawWireframe {
+    0% { border-color: transparent; box-shadow: 0 0 0 transparent; }
+    100% { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); }
+}
+
+@keyframes revealTexture {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes textRise {
+    0% { opacity: 0; transform: translateY(20px) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0) translateZ(0); }
+}
+
+@keyframes lightSweep {
+    0% { left: -100%; }
+    50% { left: 200%; }
+    100% { left: 200%; }
+}
+
+@keyframes fadeInBtn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathingText {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+}
+
+/* When Javascript triggers the 'Enter' action */
+.preloader-container.fade-out {
+    opacity: 0;
+    transform: scale(1.1); /* Slight 3D zoom out effect */
+    pointer-events: none;
+}
