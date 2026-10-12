@@ -1,10 +1,11 @@
 /* =========================================
    FILE: preloader.css
    ARCHITECT: Ultra Senior 4D Engine
-   PURPOSE: Hyper-Realistic Wood & Gold French Doors
+   PURPOSE: Hyper-Realistic Wood & Gold French Doors (UNCUT)
+   STATUS: 100% HEAVY, NO COMPRESSION
 ========================================= */
 
-/* --- 1. ENVIRONMENT --- */
+/* --- 1. THE 4D ENVIRONMENT --- */
 .preloader-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -14,225 +15,275 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    perspective: 2500px; /* Massive 3D Camera Depth */
+    perspective: 2500px; /* Massive 3D Camera Depth for Realism */
 }
 
-/* --- 2. THE OUTER GOLD ARCH (बाहर का पूरा गोल्डन बॉर्डर) --- */
+/* --- 2. THE OUTER GOLD ARCH (PERFECT SHAPE) --- */
 .outer-gold-arch {
     position: relative;
     width: 92vw;
     height: 82vh; 
     max-width: 500px;
     
-    /* Perfect Arch Geometry */
-    border-radius: 300px 300px 0 0;
+    /* Perfect Circle Arch Geometry */
+    border-radius: 250px 250px 0 0;
     
     /* The Solid Gold Outer Frame Structure */
     padding: 10px; /* Outer Gold Thickness */
-    padding-bottom: 18px; /* Heavier Base */
-    background: linear-gradient(135deg, #FFDF73 0%, #D4AF37 25%, #8B6914 50%, #F3E5AB 75%, #D4AF37 100%);
+    padding-bottom: 25px; /* Heavier Base for Weight */
     
-    /* Outer Shadows for realistic pop */
+    /* True Metallic Gold Gradient */
+    background: linear-gradient(
+        135deg, 
+        #FFDF73 0%, 
+        #D4AF37 25%, 
+        #8B6914 50%, 
+        #F3E5AB 75%, 
+        #D4AF37 100%
+    );
+    
+    /* Outer Heavy Shadows for realistic pop */
     box-shadow: 
-        0 30px 60px rgba(0,0,0,0.99), 
-        0 0 25px rgba(212, 175, 55, 0.25);
+        0 40px 80px rgba(0,0,0,0.99), 
+        0 10px 40px rgba(0,0,0,0.95),
+        0 0 25px rgba(212, 175, 55, 0.35); /* Outer Gold Aura */
         
-    /* Phase 1 Animation: Window Loading */
-    transform: translateZ(-200px) scale(0.85);
+    /* Phase 1 Animation: Window Loading from Depth */
+    transform: translateZ(-250px) scale(0.85);
     opacity: 0;
     animation: windowEntry 1.8s cubic-bezier(0.15, 1, 0.3, 1) forwards;
 }
 
-/* --- 3. THE INNER WOOD CASING (अंदर का लकड़ी का फ्रेम) --- */
+/* --- 3. THE INNER WOOD CASING (FIXED SHAPE & GAP) --- */
 .inner-wood-casing {
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 290px 290px 0 0;
     
-    /* Very Dark Vintage Wood Texture */
+    /* Matching Inner Radius so doors don't poke out */
+    border-radius: 240px 240px 0 0; 
+    overflow: hidden; /* CRITICAL: Hides the sharp door edges */
+    
+    /* Very Dark Vintage Wood Texture Base */
     background: linear-gradient(180deg, #1f0b06 0%, #0d0402 100%);
     
-    /* Wood Bevel and Inner Depth */
-    box-shadow: inset 0 40px 80px rgba(0,0,0,0.99);
+    /* Wood Bevel and Inner Extreme Depth */
+    box-shadow: 
+        inset 0 50px 100px rgba(0,0,0,0.99),
+        inset 0 10px 30px rgba(0,0,0,0.9);
     
-    /* Creating the Side Gaps and Door Space */
+    /* Creating the Side Gaps and Center Split */
     display: flex;
-    justify-content: space-between; /* Creates the gap in the middle */
+    justify-content: space-between; 
     padding: 12px; /* Side gaps showing wood frame */
     padding-top: 15%; 
-    overflow: hidden;
 }
 
-/* --- 4. THE DOORS (असली 3D दरवाज़े) --- */
+/* --- 4. THE 3D DOORS --- */
 .door {
     position: relative;
-    width: 49.2%; /* Leaves a realistic 1.6% gap in the exact center */
+    width: 49.3%; /* Leaves a realistic 1.4% gap in the exact center */
     height: 100%;
-    /* Dark Wood Door Base */
+    
+    /* Dark Wood Door Base Color */
     background: #140704;
     
-    /* The Gold Trim around the whole door itself */
-    border: 3px solid #D4AF37;
-    border-bottom-width: 8px; /* Heavy bottom kickplate */
+    /* The Thick Gold Trim around the door itself */
+    border: 3.5px solid #D4AF37;
+    border-bottom-width: 10px; /* Heavy bottom kickplate */
     
-    /* Door Bevel Shadow */
+    /* Door Bevel Shadow & Separation */
     box-shadow: 
-        inset 0 0 20px rgba(0,0,0,0.9),
-        5px 0 15px rgba(0,0,0,0.6);
+        inset 0 0 30px rgba(0,0,0,0.95), /* Inner Door Depth */
+        inset 0 0 10px rgba(212,175,55,0.2), /* Subtle gold reflection inside */
+        5px 0 20px rgba(0,0,0,0.8); /* Door Separation Depth */
 }
 
+/* Left Door Meeting Edge */
 .left-door {
     border-radius: 250px 0 0 0;
-    border-right: 4px solid #FFDF73; /* Center Meeting Edge */
+    border-right: 5px solid #FFDF73; /* Light hitting center split */
 }
 
+/* Right Door Meeting Edge */
 .right-door {
     border-radius: 0 250px 0 0;
-    border-left: 4px solid #8B6914; /* Center Meeting Edge Shadow */
+    border-left: 5px solid #8B6914; /* Shadow on center split */
 }
 
-/* Smoky Glass Inside Doors */
+/* --- 5. THE SMOKY GLASS PANES --- */
 .glass-pane {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(20,20,20,0.6) 0%, rgba(5,5,5,0.95) 100%);
+    
+    /* 4D Glass Gradient simulating Lounge Lighting */
+    background: linear-gradient(
+        135deg, 
+        rgba(30,30,30,0.65) 0%, 
+        rgba(10,10,10,0.85) 50%,
+        rgba(2,2,2,0.98) 100%
+    );
     backdrop-filter: blur(8px);
     z-index: 1;
 }
 
-/* --- 5. THE WOOD GRIDS & GOLD TRIMS (बीच की लकड़ियां) --- */
+/* --- 6. THE WOOD GRIDS & GOLD TRIMS (HEAVY SHADOWS RESTORED) --- */
 .wood-grid {
     position: absolute;
-    background: linear-gradient(90deg, #1f0b06, #2d1008, #1f0b06); /* 3D Wood */
+    /* 3D Wood Gradient Cylinders */
+    background: linear-gradient(90deg, #1f0b06, #3a150a, #1f0b06); 
     z-index: 5;
     
-    /* THE THICKER GOLD TRIM ON GRIDS (As requested) */
+    /* The thick gold trims */
     border: 2.5px solid #D4AF37;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.9);
+    
+    /* Restored Heavy Grid Shadows */
+    box-shadow: 
+        0 15px 30px rgba(0,0,0,0.99),
+        0 5px 15px rgba(0,0,0,0.8);
 }
 
 .wood-grid.vertical {
     top: 0; left: 50%;
     transform: translateX(-50%);
-    width: 22px; /* Thicker wood */
+    width: 24px; /* Very Thicker wood */
     height: 100%;
     border-top: none; border-bottom: none;
+    /* Adjusted shadow for vertical */
+    box-shadow: 
+        15px 0 30px rgba(0,0,0,0.99),
+        5px 0 15px rgba(0,0,0,0.8);
 }
 
 .wood-grid.horizontal {
     left: 0;
     width: 100%; 
-    height: 22px; /* Thicker wood */
+    height: 24px; /* Very Thicker wood */
     border-left: none; border-right: none;
 }
 
-.wood-grid.horizontal.top { top: 35%; }
-.wood-grid.horizontal.bottom { top: 65%; }
+.wood-grid.horizontal.top { top: 32%; }
+.wood-grid.horizontal.bottom { top: 68%; }
 
-/* --- 6. THE 4D ROUND BRASS HANDLES (असली 3D गोल हैंडल) --- */
+/* --- 7. THE 4D ROUND BRASS HANDLES (RESTORED DETAILS) --- */
 .brass-handle {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
+    top: 45%; /* Shifted UP so text fits perfectly below */
+    width: 36px; /* Slightly larger handles */
+    height: 36px;
     border-radius: 50%; /* Perfect Circle */
     z-index: 10;
     
-    /* 3D Sphere Gold/Brass Texture */
+    /* Real 3D Sphere Gold/Brass Texture */
     background: radial-gradient(circle at 35% 35%, #FFFFAA 0%, #D4AF37 40%, #8B6914 80%, #3a2803 100%);
     
-    /* Heavy 3D Drop Shadow & Inset Bevel */
+    /* Restored Heavy 3D Drop Shadow & Inset Bevel */
     box-shadow: 
-        5px 10px 15px rgba(0,0,0,0.9), 
-        inset -3px -3px 6px rgba(0,0,0,0.5),
-        inset 2px 2px 4px rgba(255,255,255,0.6);
+        10px 15px 25px rgba(0,0,0,0.99), 
+        5px 5px 10px rgba(0,0,0,0.8),
+        inset -4px -4px 8px rgba(0,0,0,0.7),
+        inset 2px 2px 5px rgba(255,255,255,0.8);
 }
 
-/* Left Handle placement */
-.left-handle { right: 12px; }
-/* Right Handle placement */
-.right-handle { left: 12px; }
+.left-handle { right: 14px; }
+.right-handle { left: 14px; }
 
-/* --- 7. THE BRAND NAME & SEQUENCE (The Epic Entrance) --- */
+/* --- 8. THE BRAND NAME (BOLD, BELOW HANDLES, BLOCKS BACKGROUND) --- */
 .brand-title {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) translateZ(100px);
-    width: 120%;
+    top: 76%; /* PERFECTLY PLACED BELOW HANDLES */
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(200px); /* Pushed far FRONT in 3D */
+    width: 130%; /* Bleeds over the doors */
     text-align: center;
     font-family: var(--font-heading);
-    font-weight: 800; /* Ultra Bold */
-    font-size: clamp(2.2rem, 9vw, 4rem);
-    letter-spacing: 8px;
+    
+    /* MAXIMUM BOLDNESS */
+    font-weight: 900; 
+    font-size: clamp(2.6rem, 11vw, 4.8rem);
+    letter-spacing: 6px;
     white-space: nowrap;
     z-index: 999; 
     
     /* Pure Gold Gradient Text */
-    background: linear-gradient(-45deg, #8B6914 20%, #D4AF37 40%, #FFFFAA 50%, #D4AF37 60%, #8B6914 80%);
+    background: linear-gradient(
+        -45deg, 
+        #8B6914 20%, 
+        #D4AF37 40%, 
+        #FFFFAA 50%, 
+        #D4AF37 60%, 
+        #8B6914 80%
+    );
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     
-    /* Drop shadow to pop from background */
-    filter: drop-shadow(0px 15px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0px 0px 0px transparent);
+    /* CRITICAL FIX: Heavy Solid Black Text-Shadow to block grids behind it */
+    text-shadow: 
+        0px 0px 10px #000000, 
+        0px 0px 20px #000000, 
+        0px 0px 30px #000000, 
+        0px 15px 40px #000000,
+        0px 20px 50px rgba(0,0,0,0.99);
     
-    /* Sequence: Starts hidden, emerges at 2s, shines at 3.5s */
+    /* Sequence: Hidden -> Emerges -> Shines */
     opacity: 0;
     animation: 
-        emergeFromDark 1.5s cubic-bezier(0.2, 1, 0.3, 1) 2s forwards,
-        goldShineSweep 3s infinite linear 3.5s;
+        emergeFromDark 1.6s cubic-bezier(0.2, 1, 0.3, 1) 2.2s forwards,
+        goldShineSweep 3s infinite linear 3.8s;
 }
 
-/* --- 8. TAP TO ENTER --- */
+/* --- 9. TAP TO ENTER (PREMIUM DUST-WHITE, NO GOLD) --- */
 .tap-to-enter {
-    margin-top: 55px;
+    margin-top: 60px;
     cursor: pointer;
     z-index: 999;
     opacity: 0;
-    /* Fades in last at 4.5s */
-    animation: fadeInEntry 1s ease-out 4.5s forwards; 
+    /* Fades in last */
+    animation: fadeInEntry 1s ease-out 4.8s forwards; 
 }
 
 .pulse-text {
     font-family: var(--font-heading);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 1.2rem;
-    letter-spacing: 8px;
-    font-style: italic;
+    color: rgba(230, 230, 235, 0.75); /* Premium Dust White */
+    font-size: 1.1rem;
+    letter-spacing: 12px; /* Wider tracking */
+    font-weight: 400;
     text-transform: uppercase;
+    
+    /* Soft white breathing glow */
     animation: textBreathing 2.5s infinite alternate ease-in-out;
 }
 
-/* --- 9. THE 4D SEQUENCE KEYFRAMES (The Master Clock) --- */
+/* --- 10. HEAVY 4D SEQUENCE KEYFRAMES --- */
 
-/* 0s to 1.8s: Window appears */
+/* 0s to 1.8s: Window appears from depth */
 @keyframes windowEntry {
-    0% { opacity: 0; transform: translateY(50px) translateZ(-200px) scale(0.85); box-shadow: none; }
+    0% { opacity: 0; transform: translateY(60px) translateZ(-250px) scale(0.8); box-shadow: none; }
     100% { opacity: 1; transform: translateY(0) translateZ(0) scale(1); }
 }
 
-/* 2s to 3.5s: Text emerges from deep inside */
+/* 2.2s to 3.8s: Text emerges from deep inside */
 @keyframes emergeFromDark {
-    0% { opacity: 0; transform: translate(-50%, -40%) translateZ(-50px) scale(0.9); filter: drop-shadow(0 0 0 transparent) brightness(0); }
-    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(100px) scale(1); filter: drop-shadow(0px 15px 20px rgba(0, 0, 0, 0.95)) brightness(1); }
+    0% { opacity: 0; transform: translate(-50%, -35%) translateZ(-100px) scale(0.85); filter: brightness(0); }
+    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(200px) scale(1); filter: brightness(1); }
 }
 
-/* 3.5s+: The Gold Shine passes over */
+/* 3.8s+: The Gold Shine passes over the text */
 @keyframes goldShineSweep {
-    0% { background-position: 200% center; filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.95)) drop-shadow(0px 0px 5px rgba(212,175,55,0.2)); }
-    50% { filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.95)) drop-shadow(0px 0px 25px rgba(255,255,170,0.8)); }
-    100% { background-position: -200% center; filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.95)) drop-shadow(0px 0px 5px rgba(212,175,55,0.2)); }
+    0% { background-position: 200% center; }
+    50% { filter: drop-shadow(0px 0px 25px rgba(255,255,170,0.6)); }
+    100% { background-position: -200% center; }
 }
 
-/* 4.5s: Tap to enter */
+/* 4.8s: Tap to enter fades in */
 @keyframes fadeInEntry {
-    0% { opacity: 0; transform: translateY(10px); }
+    0% { opacity: 0; transform: translateY(15px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
+/* White Breathing effect for Tap to Enter */
 @keyframes textBreathing {
-    0% { opacity: 0.3; text-shadow: 0 0 0 transparent; }
-    100% { opacity: 1; color: #D4AF37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+    0% { opacity: 0.4; text-shadow: 0 0 0 transparent; }
+    100% { opacity: 1; color: #ffffff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
 }
