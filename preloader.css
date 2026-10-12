@@ -1,6 +1,7 @@
 /* =========================================
    FILE: preloader.css
-   PURPOSE: Hyper-Realistic 4D Full-Screen Window
+   PURPOSE: The Ultimate 4D Arch Window (Wood + Gold Trim)
+   STATUS: LOCKED & FINALIZED
 ========================================= */
 
 .preloader-container {
@@ -14,138 +15,136 @@
     z-index: 9999;
 }
 
-/* 1. THE FULL-SCREEN 4D ARCH FRAME */
+/* 1. THE MASSIVE STRAIGHT-ON WINDOW FRAME */
 .arc-window-4d {
     position: relative;
-    width: 90vw; /* Covers almost full screen */
-    height: 82vh; 
-    max-width: 600px;
+    width: 90vw;
+    height: 80vh; 
+    max-width: 500px;
     
-    /* Perfect Top Arch */
+    /* The Perfect Arch */
     border-top-left-radius: 300px;
     border-top-right-radius: 300px;
     
-    /* Deep Dark Interior */
-    background: linear-gradient(180deg, #120406 0%, #050101 100%);
+    /* THE GLASS AREA (Empty Space) */
+    /* Smoky dark interior glass effect */
+    background: radial-gradient(ellipse at center, rgba(35, 15, 18, 0.6) 0%, rgba(5, 2, 2, 0.95) 100%);
+    backdrop-filter: blur(5px);
     
-    /* Realistic Thick 3D Borders (Wood/Metal casing) */
-    border-top: 15px solid #230b0e;
-    border-left: 15px solid #1a0709;
-    border-right: 15px solid #1a0709;
-    border-bottom: 25px solid #0f0304; /* Heavier base */
+    /* THE WOODEN THICK FRAME */
+    border: 24px solid #230b0e; /* Dark Vintage Wood */
+    border-bottom-width: 40px; /* Heavy bottom base */
     
-    /* Hyper-Realistic Depth & Shadows */
+    /* THE GOLDEN HIGHLIGHTS (Trims on the borders) */
     box-shadow: 
-        inset 0px 30px 60px rgba(0,0,0,0.99), /* Deep inside shadow */
-        inset 0 0 15px rgba(212, 175, 55, 0.2), /* Subtle gold reflection inside */
-        0px 20px 50px rgba(0,0,0,0.9); /* Heavy drop shadow on outside */
+        inset 0 0 0 2px rgba(212, 175, 55, 0.8), /* Inner thin gold line */
+        0 0 0 2px rgba(212, 175, 55, 0.6), /* Outer thin gold line */
+        inset 0 40px 80px rgba(0,0,0,0.9), /* Massive inside depth */
+        0 30px 60px rgba(0,0,0,0.95); /* Outer shadow */
         
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    /* Heavy Cinematic Entry (No weird spinning) */
+    transform: scale(0.92);
+    opacity: 0;
+    animation: cinematicPop 1.5s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
 }
 
-/* Inner Bevel (To make the window edge look curved and real) */
-.arc-window-4d::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    border-top-left-radius: 280px;
-    border-top-right-radius: 280px;
-    pointer-events: none;
-    z-index: 20;
-}
-
-/* 2. THE WINDOW PANES (असली लकड़ी की ग्रिड्स) */
+/* 2. THE WOODEN GRIDS WITH GOLD HIGHLIGHTS */
 .window-grids {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10; /* Placed over the text */
+    z-index: 5; /* Behind the text */
     pointer-events: none;
 }
 
+/* Vertical Wood Bar */
 .grid-vertical {
     position: absolute;
     top: 0; left: 50%;
     transform: translateX(-50%);
-    width: 14px; height: 100%;
-    /* 3D Wood cylinder effect */
-    background: linear-gradient(90deg, #050102, #2e1014 50%, #050102);
-    box-shadow: 8px 0 20px rgba(0,0,0,0.9);
+    width: 18px; height: 100%;
+    background: #1a0709; /* Dark Wood */
+    border-left: 1px solid rgba(212, 175, 55, 0.5); /* Gold trim */
+    border-right: 1px solid rgba(212, 175, 55, 0.5); /* Gold trim */
+    box-shadow: 10px 0 20px rgba(0,0,0,0.8);
 }
 
+/* Horizontal Wood Bars */
 .grid-horizontal {
     position: absolute;
     left: 0;
-    width: 100%; height: 14px;
-    /* 3D Wood cylinder effect */
-    background: linear-gradient(180deg, #050102, #2e1014 50%, #050102);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.9);
+    width: 100%; height: 18px;
+    background: #1a0709; /* Dark Wood */
+    border-top: 1px solid rgba(212, 175, 55, 0.5); /* Gold trim */
+    border-bottom: 1px solid rgba(212, 175, 55, 0.5); /* Gold trim */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
 }
 
 .top-arch-base { top: 38%; }
 .middle-bar { top: 68%; }
 
-/* 3. THE BRAND TEXT (Single Line & Letter Shine) */
+/* 3. THE BRAND TEXT (FRONT & CENTER) */
 .brand-title {
     position: absolute;
     width: 100%;
     text-align: center;
     font-family: var(--font-heading);
-    /* Responsive size to fit in one line */
-    font-size: clamp(1.8rem, 7vw, 3rem);
-    letter-spacing: 5px;
-    white-space: nowrap; /* Forces text to stay on one line */
-    z-index: 5; /* Under the wooden grids */
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: 6px;
+    white-space: nowrap;
     
-    /* The Gold Shine Effect specifically on the letters */
-    background: linear-gradient(
-        -45deg, 
-        #8B6914 30%, 
-        #D4AF37 45%, 
-        #FFFFAA 50%, 
-        #D4AF37 55%, 
-        #8B6914 70%
-    );
+    /* OVER THE GRIDS */
+    z-index: 999; 
+    
+    /* Clean Solid Gold Gradient */
+    background: linear-gradient(to right, #D4AF37, #FFFFAA, #D4AF37);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     
-    /* Soft glow around text */
-    filter: drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.3));
+    /* Text Shadow to separate from grids */
+    filter: drop-shadow(0px 8px 10px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 15px rgba(212, 175, 55, 0.4));
     
-    animation: textRise 1.5s ease-out forwards, shineLetters 3.5s infinite linear;
+    animation: textFloat 2s ease-out forwards, textShine 4s infinite linear;
 }
 
 /* 4. TAP TO ENTER */
 .tap-to-enter {
-    margin-top: 30px;
+    margin-top: 40px;
     cursor: pointer;
 }
 
 .pulse-text {
     font-family: var(--font-heading);
     color: rgba(255, 255, 255, 0.6);
-    font-size: 1.1rem;
-    letter-spacing: 4px;
+    font-size: 1.2rem;
+    letter-spacing: 6px;
     font-style: italic;
-    animation: pulseGlow 2s infinite alternate ease-in-out;
+    text-transform: uppercase;
+    animation: pulseGlow 2.5s infinite alternate ease-in-out;
 }
 
-/* --- 4D KEYFRAMES --- */
-@keyframes textRise {
-    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+/* --- THE HEAVY ANIMATION ENGINE --- */
+@keyframes cinematicPop {
+    0% { opacity: 0; transform: scale(0.92); box-shadow: none; }
+    100% { opacity: 1; transform: scale(1); }
 }
 
-@keyframes shineLetters {
-    0% { background-position: 200% center; }
-    100% { background-position: -200% center; }
+@keyframes textFloat {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 @keyframes pulseGlow {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; color: var(--brand-gold); text-shadow: 0 0 15px rgba(212,175,55,0.5); }
+    0% { opacity: 0.3; text-shadow: 0 0 0 transparent; }
+    100% { opacity: 1; color: #D4AF37; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
 }
